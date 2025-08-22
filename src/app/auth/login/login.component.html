@@ -1,0 +1,52 @@
+<form [formGroup]="loginForm" (ngSubmit)="loginFormSubmit()" class="mt-4">
+  <div class="col-sm-12">
+    <h4>Login</h4>
+  </div>
+
+  <div class="col-sm-12 ">
+    <app-input formControlName="email" prefixIcon="email"
+               label="Email Address" placeholder="Email" type="email"/>
+    @if(isLoginSubmit && control['email'].invalid){
+      <mat-error>
+        @switch (true) {
+          @case(control['email'].hasError('email')){
+            Provide valid email address
+          }
+          @default {
+            Email is required
+          }
+        }
+      </mat-error>
+    }
+  </div>
+<div class="col-sm-12 text-end">
+  <a routerLink="/auth/reset-password">Forgot Password?</a>
+</div>
+  <div class="col-sm-12">
+    <app-input
+      formControlName="password"
+      [showInputToggle]="true"
+      prefixIcon="lock"
+      label="Password" type="password" placeholder="******"/>
+    @if(isLoginSubmit && control['password'].invalid){
+      <mat-error>
+        @switch (true) {
+          @case(control['password'].hasError('required')){
+            Provide password
+          }
+          @default {
+            Password should have at least 4 characters
+          }
+        }
+      </mat-error>
+    }
+  </div>
+
+  <div class="col-sm-12 mb-3">
+    <app-button text="Login"></app-button>
+  </div>
+  <div class="col-sm-12 text-end">
+    Don't have an account? <a routerLink="/auth/register">Register here!</a>
+  </div>
+
+</form>

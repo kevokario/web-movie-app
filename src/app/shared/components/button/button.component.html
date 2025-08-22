@@ -1,0 +1,21 @@
+
+ @if (style === 'mat-flat-button') {
+   <button [type]="type" mat-flat-button class="w-100 text-white" [color]="color">
+     @if(icon){
+       <mat-icon matPrefix>{{icon}}</mat-icon>
+     }
+     {{text}}
+
+   </button>
+ } @else {
+   <button [type]="type" mat-stroked-button class="w-100" [color]="color">
+     @if(icon){
+       <mat-icon matPrefix>{{icon}}</mat-icon>
+     }
+     {{text}}
+
+   </button>
+ }
+
+
+

@@ -1,0 +1,61 @@
+<form [formGroup]="registerForm" (ngSubmit)="registerFormSubmit()"  class="mt-4">
+  <div class="col-sm-12">
+    <h4>Register</h4>
+  </div>
+
+  <div class="col-sm-12">
+    <app-input formControlName="name" label="Full names" placeholder="Your Name" type="text" prefixIcon="person"/>
+    @if(isRegisterSubmit && control['name'].invalid){
+      <mat-error>
+        @switch (true) {
+          @case (control['name'].hasError('required')){
+            Provide your name
+          }
+          @default {
+            Name should have atleast 3 characters
+          }
+        }
+      </mat-error>
+    }
+  </div>
+
+  <div class="col-sm-12">
+    <app-input label="Email" formControlName="email" placeholder="Email Address" type="email" prefixIcon="email"/>
+    @if(isRegisterSubmit && control['email'].invalid){
+      <mat-error>
+        @switch (true) {
+          @case (control['email'].hasError('required')){
+            Provide your email
+          }
+          @default {
+            Provide valid email address
+          }
+        }
+      </mat-error>
+    }
+  </div>
+  <div class="col-sm-12">
+    <app-input formControlName="password" label="Password" placeholder="******" type="password" prefixIcon="lock"
+               [showInputToggle]="true"/>
+    @if(isRegisterSubmit && control['password'].invalid){
+      <mat-error>
+        @switch (true) {
+          @case (control['password'].hasError('required')){
+            Provide your password
+          }
+          @default {
+            Password should have at-least 4 characters
+          }
+        }
+      </mat-error>
+    }
+  </div>
+
+  <div class="col-sm-12 mb-3">
+    <app-button text="Register"></app-button>
+  </div>
+  <div class="col-sm-12 text-end">
+    Already have an account? <a routerLink="/auth/login">Login here!</a>
+  </div>
+
+</form>

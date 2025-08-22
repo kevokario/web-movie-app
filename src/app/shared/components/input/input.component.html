@@ -1,0 +1,23 @@
+<mat-form-field class="w-100 mb-0"  appearance="outline" floatLabel="always">
+  <mat-label>{{label}}</mat-label>
+  <input #myInput="ngModel" ngModel matInput [type]="type" [placeholder]="placeholder"
+         [value]="value" (input)="onInput($event)" (blur)="onBlur()">
+
+  @if(prefixIcon){
+    <mat-icon matPrefix>{{prefixIcon}}</mat-icon>
+  }
+  @if(surfixIcon){
+    <mat-icon matSuffix>{{surfixIcon}}</mat-icon>
+  }
+  @if(showInputToggle){
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="togglePasswordView()">
+      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+  }
+
+  <ng-content></ng-content>
+</mat-form-field>

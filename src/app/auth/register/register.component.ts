@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../core/services/auth.service";
+import {User} from "../../core/models/user";
+import {UiService} from "../../shared/services/ui.service";
 
 @Component({
   selector: 'app-register',
@@ -11,7 +14,11 @@ export class RegisterComponent implements OnInit {
   registerForm!:FormGroup;
   isRegisterSubmit = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private uiService: UiService,
+    ) {
   }
 
   ngOnInit() {
@@ -38,6 +45,12 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    console.log(form.value)
+    const user: User = form.value as User;
+
+    this.authService.register(user).then()
+      .catch((e)=> {
+        let message = e.code.includes('email-already') ?' email Already in use': e.code;
+        this.uiService.showMessage('Error',message);
+      })
   }
 }

@@ -45,6 +45,9 @@
   <div class="col-sm-12 mb-3">
     <app-button text="Login"></app-button>
   </div>
+  <div class="col-sm-12 mb-3">
+    <app-button (click)="loginWithGmail()" class="w-100" text="Login with Google" [btnStyle]="'mat-stroked-button'" type="button"></app-button>
+  </div>
   <div class="col-sm-12 text-end">
     Don't have an account? <a routerLink="/auth/register">Register here!</a>
   </div>

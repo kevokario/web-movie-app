@@ -41,6 +41,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 const materialModules =  [
   MatButtonModule,
@@ -79,7 +80,7 @@ const materialModules =  [
 ];
 
 @NgModule({
-  declarations: [InputComponent, ButtonComponent],
+  declarations: [InputComponent, ButtonComponent, LoaderComponent],
   imports: [
     CommonModule,
     ...materialModules,
@@ -89,11 +90,13 @@ const materialModules =  [
   ],
   exports: [
     ...materialModules,
+    CommonModule,
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     InputComponent,
     ButtonComponent,
+    LoaderComponent,
   ]
 })
 export class SharedModule { }

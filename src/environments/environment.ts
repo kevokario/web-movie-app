@@ -7,5 +7,8 @@ export const environment = {
     storageBucket: "movie-app-c7ab8.firebasestorage.app",
     messagingSenderId: "1015575630748",
     appId: "1:1015575630748:web:479bf648fe61399fe8ee59"
-  }
+  },
+  token: 'authToken',
+  user:'loggedInUser',
+  appUrl: 'http://localhost:4200'
 };

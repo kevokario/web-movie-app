@@ -1,5 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {User} from "../../core/models/user";
+import {AuthService} from "../../core/services/auth.service";
+import {UiService} from "../../shared/services/ui.service";
+import { FirebaseError } from 'firebase/app';
+import {finalize} from "rxjs";
+import {LoaderService} from "../../shared/services/loader.service";
+
 
 @Component({
   selector: 'app-login',
@@ -12,7 +19,9 @@ export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   isLoginSubmit = false;
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private uiService: UiService,
   ) {
   }
 
@@ -39,7 +48,27 @@ export class LoginComponent implements OnInit{
       return;
     }
     // do some firebase authentication
-    console.log(form.value)
+    const user: User  = form.getRawValue() as User;
+    this.authService.login(user).subscribe({
+      error:(err:FirebaseError) => {
+        let message = err.code.includes('credential') ?'Invalid email/password': err.code;
+        this.uiService.showMessage('Error',message);
+      },
+    })
+  }
+   loaderService = inject(LoaderService);
+  loginWithGmail(){
+
+    this.loaderService.showLoader();
+    this.authService.loginWithGoogle()
+      .pipe(
+        finalize(() => {this.loaderService.hideLoader()})
+      ).subscribe({
+      error:()=>{
+      this.uiService.showNetworkMessage();
+    }
+
+    })
   }
 
 }

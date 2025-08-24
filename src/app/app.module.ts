@@ -7,8 +7,11 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import {environment} from "../environments/environment";
-// import {AngularFireModule} from "@angular/fire/compat";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
+import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
+import {loaderInterceptor} from "./core/interceptors/loader.interceptor";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -17,13 +20,20 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
+    HttpClientModule,
     // AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     provideFirebaseApp(() => initializeApp({...environment.firebase} )),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

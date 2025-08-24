@@ -2,17 +2,16 @@
   <div class="col-sm-12">
     <h4>Register</h4>
   </div>
-
   <div class="col-sm-12">
     <app-input formControlName="name" label="Full names" placeholder="Your Name" type="text" prefixIcon="person"/>
     @if(isRegisterSubmit && control['name'].invalid){
       <mat-error>
         @switch (true) {
           @case (control['name'].hasError('required')){
-            Provide your name
+            Provide your name.
           }
           @default {
-            Name should have atleast 3 characters
+            Name should have at-least 3 characters
           }
         }
       </mat-error>
@@ -51,8 +50,10 @@
     }
   </div>
 
-  <div class="col-sm-12 mb-3">
-    <app-button text="Register"></app-button>
+  <div class="row mb-3">
+    <div class="col-sm-12">
+      <app-button text="Register"/>
+    </div>
   </div>
   <div class="col-sm-12 text-end">
     Already have an account? <a routerLink="/auth/login">Login here!</a>

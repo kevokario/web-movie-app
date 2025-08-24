@@ -1,0 +1,26 @@
+<p>home works!</p>
+<pre>{{ authService.userBehaviourSubject$ | async | json }}</pre>
+<app-button type="button" text="Logout" (click)="logout()"></app-button>
+<app-button type="button" class="ms-2" text="Load Users" (click)="loadUsers()"></app-button>
+<!--<pre>{{users|json}}</pre>-->
+<div class="row">
+  @for ( user of users; track user.id) {
+    <div class="col-sm-6">
+      <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+          <img [src]="user.photo ?? 'favicon.ico'" [alt]="user.name" style="width: 50px; border-radius: 50%" >
+        </div>
+        <mat-card-title>{{ user.name }}</mat-card-title>
+        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-actions [align]="'end'">
+        <app-button type="button" btnStyle="mat-stroked-button" class="me-2" text="like"/>
+        <app-button type="button" btnStyle="mat-stroked-button" text="Share"/>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+  }
+</div>
+

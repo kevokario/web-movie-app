@@ -11,5 +11,5 @@ export class ButtonComponent {
   @Input() text: string = '';
   @Input() icon: string | null = null;
   @Input() suffixIcon: string | null = null;
-  @Input() style: 'mat-flat-button' | 'mat-stroked-button' = "mat-flat-button";
+  @Input() btnStyle: 'mat-flat-button' | 'mat-stroked-button' = "mat-flat-button";
 }

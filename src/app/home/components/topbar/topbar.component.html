@@ -1,0 +1,24 @@
+<mat-toolbar class="ps-1">
+    <app-button
+      (click)="toggleEventEmitter.emit()"
+      type="button" btnStyle="mat-icon-button" icon="menu"/>
+
+
+  <span >Movie - App</span>
+  <span class="toolbar-spacer"></span>
+
+  <app-button [matMenuTriggerFor]="toolbarMenu" btnStyle="mat-icon-button" icon="more_vert"></app-button>
+</mat-toolbar>
+
+<mat-menu #toolbarMenu="matMenu">
+  <a routerLink="/home/settings" mat-menu-item>
+    <mat-icon>person</mat-icon>
+    <span>My Account</span>
+  </a>
+  <mat-divider></mat-divider>
+  <button (click)="authService.logout()" mat-menu-item>
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>
+

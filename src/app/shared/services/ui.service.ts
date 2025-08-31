@@ -53,7 +53,6 @@ export class UiService {
       </div>
       <div class="pt-0" matSnackBarLabel>{{data.message}}</div>
     </div>
-
   `,
   standalone: true,
   imports:[SharedModule]

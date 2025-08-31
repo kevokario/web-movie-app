@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Material Components
@@ -42,6 +42,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import {CoreModule} from "../core/core.module";
+import { MovieSliderComponent } from './components/movie-slider/movie-slider.component';
+import { MovieCardComponent } from './components/movie-card/movie-card.component';
+import { NoRecordsFoundComponent } from './components/no-records-found/no-records-found.component';
 
 const materialModules =  [
   MatButtonModule,
@@ -76,27 +80,36 @@ const materialModules =  [
   MatPaginatorModule,
   MatListModule,
   MatTreeModule,
-  MatStepperModule
+  MatStepperModule,
+  FlexLayoutModule,
+  FormsModule,
+  ReactiveFormsModule,
+  CoreModule
 ];
 
 @NgModule({
-  declarations: [InputComponent, ButtonComponent, LoaderComponent],
-  imports: [
-    CommonModule,
-    ...materialModules,
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  exports: [
-    ...materialModules,
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
+  declarations: [
     InputComponent,
     ButtonComponent,
     LoaderComponent,
+    MovieSliderComponent,
+    MovieCardComponent,
+    NoRecordsFoundComponent],
+  imports: [
+    CommonModule,
+    ...materialModules,
+
+  ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  exports: [
+    ...materialModules,
+    CommonModule,
+    InputComponent,
+    ButtonComponent,
+    LoaderComponent,
+    MovieSliderComponent,
+    MovieCardComponent,
+    NoRecordsFoundComponent
   ]
 })
 export class SharedModule { }

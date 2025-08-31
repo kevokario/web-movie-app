@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../core/models/user";
 import {AuthService} from "../../core/services/auth.service";
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit{
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private uiService: UiService,
+    private loaderService: LoaderService
   ) {
   }
 
@@ -49,20 +50,20 @@ export class LoginComponent implements OnInit{
     }
     // do some firebase authentication
     const user: User  = form.getRawValue() as User;
-    this.authService.login(user).subscribe({
+    // this.loaderService.showLoader();
+    this.authService.login(user).pipe(
+      // finalize(() => {this.loaderService.hideLoader()})
+    ).subscribe({
       error:(err:FirebaseError) => {
-        let message = err.code.includes('credential') ?'Invalid email/password': err.code;
+        const message = err.code.includes('credential') ?'Invalid email/password': err.code;
         this.uiService.showMessage('Error',message);
       },
     })
   }
-   loaderService = inject(LoaderService);
   loginWithGmail(){
 
-    this.loaderService.showLoader();
     this.authService.loginWithGoogle()
       .pipe(
-        finalize(() => {this.loaderService.hideLoader()})
       ).subscribe({
       error:()=>{
       this.uiService.showNetworkMessage();

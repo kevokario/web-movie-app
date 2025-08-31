@@ -1,0 +1,72 @@
+@if(useFullBackground) {
+  <swiper-container
+    slides-per-view="1"
+    pagination="true"
+    speed="500"
+    loop="true"
+    autoplay="true"
+    effect="cube"
+    autoplay-delay="4000"
+  >
+    @for (movie of movies; track movie.id){
+
+      <swiper-slide
+        [style.height]="isMobile ? 'calc(75vh - 80px)' : 'calc(45vh-40px)'"
+        [style.background-image]="movie.backdrop_path | urlSanitizer :'style': true : 'w500'">
+        <div class="slide-overlay">
+          <h2 class="mb-1 title">{{ getTitle(movie) }}</h2>
+
+          <div class="d-flex flex-row my-1">
+            <app-button  style="width: fit-content" [text]="movie.vote_average | number : '1.1-1' "></app-button>
+          </div>
+          <div class="d-flex flex-row">
+            <app-button btnStyle="mat-stroked-button" class="me-1" style="width: fit-content" text="View Info"></app-button>
+            <app-button btnStyle="mat-stroked-button" style="width: fit-content" text="Add To Favorites"></app-button>
+          </div>
+          <p>{{ movie.overview }}</p>
+        </div>
+
+      </swiper-slide>
+
+    }
+  </swiper-container>
+} @else {
+  @switch (true) {
+    @case (isMobile){
+      <swiper-container
+        slides-per-view="2.5"
+        pagination="false"
+        speed="500"
+        loop="true"
+        autoplay="true"
+        effect="slide"
+        autoplay-delay="3000">
+        <ng-template [ngTemplateOutlet]="movieCardsTemplateView"></ng-template>
+      </swiper-container>
+    }
+    @default {
+      <swiper-container
+        slides-per-view="4.5"
+        pagination="false"
+        speed="500"
+        loop="true"
+        autoplay="true"
+        effect="slide"
+        autoplay-delay="3000">
+        <ng-template [ngTemplateOutlet]="movieCardsTemplateView"></ng-template>
+
+      </swiper-container>
+    }
+  }
+}
+
+
+<ng-template #movieCardsTemplateView>
+  @for (movie of movies; track movie.id){
+
+    <swiper-slide class="me-2 py-2" style="min-height: fit-content;">
+      <app-movie-card class="w-100" [imageSize]="'w154'" [showActionButtons]="false" [genres]="genre" [movie]="movie" ></app-movie-card>
+    </swiper-slide>
+
+  }
+</ng-template>

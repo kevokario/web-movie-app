@@ -1,0 +1,36 @@
+<mat-card>
+  <img style="min-height: 250px" mat-card-image
+       [src]="movie.poster_path |
+        urlSanitizer: 'image': true :  imageSize "
+       alt="{{title}}" loading="lazy" (error)="onImgError($event)"/>
+  @if(!showActionButtons){
+    <mat-card-header class="px-1 pt-2">
+      <h3 class="text-accent my-0 " style="font-size: xx-small"
+          matTooltip="{{title }}"> {{ title | truncate : isMobile ? 22:27  }}</h3>
+    </mat-card-header>
+  }
+  @if(showActionButtons){
+    <mat-card-header >
+      <h3 class="text-accent mb-0 movie-title" matTooltip="{{title}}"> {{ title }}</h3>
+    </mat-card-header>
+    <mat-card-content>
+      @if(showMovieType){
+        <small class="mb-2 movie-type">{{mediaType | titlecase}}</small>
+      }
+      <div class="d-flex flex-row mb-2 justify-content-between">
+        <app-button btnStyle="mat-stroked-button"
+                    text="{{ getGenre(movie).name}}"/>
+        <app-button btnStyle="mat-stroked-button"
+                    text="{{ movie.vote_average | number: '1.1-1' }}"
+                    [icon]="'star'"/>
+
+      </div>
+      <div class="d-flex flex-row mt-1 justify-content-center">
+        <app-button class="small-button flex-fill p-0"
+                    btnStyle="mat-flat-button" [btnSize]="isMobile ? 'small': 'default'"
+                    text="View"></app-button>
+      </div>
+
+    </mat-card-content>
+  }
+</mat-card>

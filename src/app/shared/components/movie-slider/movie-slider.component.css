@@ -1,0 +1,26 @@
+
+swiper-slide {
+  min-height: 400px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  color: white;
+}
+
+swiper-slide .slide-overlay {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.7),
+    rgba(0,0,0,0)
+  );
+}
+
+swiper-slide .title{
+  color: #ff4081;
+  font-weight: bold;
+}

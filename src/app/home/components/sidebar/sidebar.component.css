@@ -1,0 +1,18 @@
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover
+}
+.mdc-list-item.mdc-list-item--activated,
+.mdc-list-item.mdc-list-item--activated .mdc-list-item__primary-text,
+.mdc-list-item.mdc-list-item--activated mat-icon {
+  color: #ff4081;
+}
+
+.mat-mdc-list-base.mat-mdc-list-base .mdc-list-item--selected.mdc-list-item--with-leading-icon .mdc-list-item__start, .mat-mdc-list-base.mat-mdc-list-base .mdc-list-item--activated.mdc-list-item--with-leading-icon .mdc-list-item__start {
+  color: #ff4081;
+}
+.mat-mdc-nav-list .mat-mdc-list-item.mdc-list-item--activated {
+  background-color: rgba(255, 64, 129, 0.1);
+}

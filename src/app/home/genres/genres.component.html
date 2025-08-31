@@ -1,0 +1,100 @@
+@defer (when genres){
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-12">
+        <h1 class="mt-4 mb-1 text-accent"><b>Search By Genre</b></h1>
+      </div>
+
+      <div class="col-sm-12">
+
+        <mat-chip-listbox multiple (change)="onSelectionChange($event)">
+          @for (genre of genres; track genre) {
+            <mat-chip-option color="accent" [value]="genre.id">{{genre.name}}</mat-chip-option>
+          }
+        </mat-chip-listbox>
+
+
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12">
+        <mat-tab-group color="accent">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="me-2">movie</mat-icon> Movies
+            </ng-template>
+            <div>
+              @defer (when movieCollection){
+                <div class="container-fluid">
+                  <div class="row">
+                    @for (movie of movieCollection.results; track movie.id) {
+                      <div class="col-sm-6 col-lg-4 my-2">
+                        <app-movie-card [genres]="genres" [movie]="movie"></app-movie-card>
+                      </div>
+                    } @empty {
+                      <app-no-records-found></app-no-records-found>
+                    }
+                  </div>
+
+                  @if (movieCollection.results.length > 0) {
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <mat-paginator [length]="movieCollection.total_pages"
+                                       [pageSize]="20"
+                                       [pageIndex]="moviePageIndex"
+                                       [showFirstLastButtons]="true"
+                                       (page)="onMoviePageChange($event)"
+                                       aria-label="Select page">
+                        </mat-paginator>
+                      </div>
+                    </div>
+                  }
+
+                </div>
+              }
+
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="me-2">tv</mat-icon> TV Series
+            </ng-template>
+            <div>
+              @defer (when seriesCollection){
+                <div class="container-fluid">
+                  <div class="row">
+                    @for (series of seriesCollection.results; track series.id) {
+                      <div class="col-sm-6 col-lg-4 my-2">
+                        <app-movie-card [genres]="genres" [movie]="series"></app-movie-card>
+                      </div>
+                    } @empty {
+                      <app-no-records-found></app-no-records-found>
+                    }
+                  </div>
+
+                  @if(seriesCollection.results.length>0){   <div class="row">
+                    <div class="col-sm-12">
+                      <mat-paginator [length]="seriesCollection.total_pages"
+                                     [pageSize]="20"
+                                     [pageIndex]="seriesPageIndex"
+                                     [showFirstLastButtons]="true"
+                                     (page)="onSeriesPageChange($event)"
+                                     aria-label="Select page">
+                      </mat-paginator>
+                    </div>
+                  </div>}
+
+                </div>
+              }
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+
+
+  </div>
+}
+

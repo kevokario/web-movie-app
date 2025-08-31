@@ -1,0 +1,34 @@
+@defer (when tvSeriesCollection){
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="mt-4 mb-1 text-accent">
+          <b>Popular TV Series'</b>
+        </h1>
+      </div>
+
+      <div class="row">
+        @for (series of tvSeriesCollection.results; track series.id) {
+          <div class="col-sm-6 col-lg-4 my-2">
+            <app-movie-card [genres]="genre" [movie]="series"></app-movie-card>
+          </div>
+        }
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-paginator [length]="totalPages"
+                         [pageSize]="pageSize"
+                         [pageIndex]="pageIndex"
+                         [showFirstLastButtons]="true"
+                         (page)="onPageChange($event)"
+                         aria-label="Select page">
+          </mat-paginator>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+}

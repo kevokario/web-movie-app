@@ -8,8 +8,9 @@ import {Component, Input} from '@angular/core';
 export class ButtonComponent {
   @Input() color: 'primary' | 'warn' | 'accent' = 'accent';
   @Input() type: 'button'|'submit' = "submit";
-  @Input() text: string = '';
+  @Input() text: string | null = '';
   @Input() icon: string | null = null;
   @Input() suffixIcon: string | null = null;
-  @Input() btnStyle: 'mat-flat-button' | 'mat-stroked-button' = "mat-flat-button";
+  @Input() btnStyle: 'mat-flat-button' | 'mat-stroked-button' | 'mat-icon-button' = "mat-flat-button";
+  @Input() btnSize: 'small' | 'default' = 'default';
 }

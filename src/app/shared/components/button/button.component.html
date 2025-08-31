@@ -1,21 +1,29 @@
+@switch (true) {
+  @case (btnStyle === 'mat-flat-button') {
+    <button [type]="type" mat-flat-button [ngClass]="{'small-button': btnSize === 'small'}" class="w-100 text-white" [color]="color">
+      @if(icon){
+        <mat-icon matPrefix>{{icon}}</mat-icon>
+      }
+      {{text}}
 
- @if (btnStyle === 'mat-flat-button') {
-   <button [type]="type" mat-flat-button class="w-100 text-white" [color]="color">
-     @if(icon){
-       <mat-icon matPrefix>{{icon}}</mat-icon>
-     }
-     {{text}}
-
-   </button>
- } @else {
-   <button [type]="type" mat-stroked-button class="w-100" [color]="color">
-     @if(icon){
-       <mat-icon matPrefix>{{icon}}</mat-icon>
-     }
-     {{text}}
-
-   </button>
- }
+    </button>
+  }
+  @case (btnStyle === 'mat-stroked-button') {
+    <button [type]="type" mat-stroked-button class="w-100" [color]="color">
+      @if(icon){
+        <mat-icon matPrefix>{{icon}}</mat-icon>
+      }
+      {{text}}
+    </button>
+  }
+  @case (btnStyle === 'mat-icon-button') {
+    <button [type]="type" mat-icon-button class="w-100" [color]="color">
+      @if(icon){
+        <mat-icon matPrefix>{{icon}}</mat-icon>
+      }
+    </button>
+  }
+}
 
 
 

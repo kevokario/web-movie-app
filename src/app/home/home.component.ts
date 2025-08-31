@@ -1,29 +1,39 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../core/services/auth.service";
-import {User} from "../core/models/user";
+import {MovieService} from "../core/services/movie.service";
+import {ResponsiveService} from "../shared/utils/responsive.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
-  users:User[] = [];
+export class HomeComponent implements OnInit{
+  isMobile = false;
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private responsiveService: ResponsiveService,
+    private movieService: MovieService,
   ) {
   }
 
-  async logout() {
-    await this.authService.logout();
+  ngOnInit() {
+    this.initBreakPointObserver();
+    this.initGenreList();
   }
 
-  loadUsers(){
-    this.authService.getUsers().subscribe({
-      next:(e)=>{
-        this.users = e;
-      }
+  initBreakPointObserver(){
+    this.responsiveService.initBreakPointObserver();
+    this.responsiveService.isMobile.subscribe({
+      next:(value)=> this.isMobile = value,
     })
   }
+
+  initGenreList(){
+    this.movieService.getMovieGenres().subscribe();
+  }
+
+
+
 
 }

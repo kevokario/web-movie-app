@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private uiService: UiService,
-    ) {
+  ) {
   }
 
   ngOnInit() {
@@ -47,10 +47,12 @@ export class RegisterComponent implements OnInit {
 
     const user: User = form.value as User;
 
-    this.authService.register(user).then()
-      .catch((e)=> {
-        let message = e.code.includes('email-already') ?' email Already in use': e.code;
-        this.uiService.showMessage('Error',message);
-      })
+    this.authService.register(user).subscribe({
+        error: (e)=> {
+          const message = e.code.includes('email-already') ?' email Already in use': e.code;
+          this.uiService.showMessage('Error',message);
+        }
+      }
+    );
   }
 }

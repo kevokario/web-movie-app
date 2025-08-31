@@ -10,5 +10,10 @@ export const environment = {
   },
   token: 'authToken',
   user:'loggedInUser',
-  appUrl: 'http://localhost:4200'
+  appUrl: 'http://localhost:4200',
+  tmdbApi: {
+    baseUrl: 'https://api.themoviedb.org/3',
+    imageUrl: 'https://image.tmdb.org/t/p',
+    apiKey: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODE0NmMzMmFmNmU4ZmZhYWYzZjkyZjU2ZGFjNTQwYSIsIm5iZiI6MTY4NzQxOTM0Ny41OTEsInN1YiI6IjY0OTNmOWQzODliNTYxMDBmZjYzODczNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OJfcs6apzWQDO-kjt2co4Evx3kSCwOnz07NbLs_aydQ'
+  }
 };

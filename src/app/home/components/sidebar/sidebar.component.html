@@ -1,0 +1,65 @@
+<div class="d-flex flex-column align-items-center justify-content-center p-3 mt-2">
+  <img [src]="!user.photo  ? 'favicon.ico' : user.photo | urlSanitizer: 'image' : false  " alt="Profile" class="profile-img">
+  <h3 class="mb-0">{{user.name}}</h3>
+  <h4 class="mb-0">{{user.email}}</h4>
+</div>
+<mat-divider></mat-divider>
+<mat-nav-list >
+
+  <mat-list-item (click)="closeSideBar()"  [activated]="homeLink.isActive"
+                  routerLinkActive
+                  #homeLink="routerLinkActive"
+                  routerLink="/home/dashboard">
+    <mat-icon matListItemIcon>home</mat-icon>
+    <span matListItemTitle>Home</span>
+  </mat-list-item>
+
+  <mat-list-item (click)="closeSideBar()"  [activated]="searchLink.isActive"
+                  routerLinkActive
+                  #searchLink="routerLinkActive"
+                  routerLink="/home/search">
+    <mat-icon matListItemIcon>search</mat-icon>
+    <span matListItemTitle>Search</span>
+  </mat-list-item>
+
+
+
+  <mat-list-item (click)="closeSideBar()"  [activated]="moviesLink.isActive"
+                  routerLinkActive
+                  #moviesLink="routerLinkActive"
+                  routerLink="/home/movies">
+    <mat-icon matListItemIcon>movie</mat-icon>
+    <span matListItemTitle>Movies</span>
+  </mat-list-item>
+
+  <mat-list-item (click)="closeSideBar()" [activated]="tvLink.isActive"
+                 routerLinkActive
+                 #tvLink="routerLinkActive"
+                 routerLink="/home/tv-series">
+    <mat-icon matListItemIcon>tv</mat-icon>
+    <span matListItemTitle>TV Series</span>
+  </mat-list-item>
+
+  <mat-list-item (click)="closeSideBar()" [activated]="animationsLink.isActive" routerLinkActive #animationsLink="routerLinkActive" routerLink="/home/animations">
+    <mat-icon matListItemIcon>animation</mat-icon>
+    <span matListItemTitle>Animations</span>
+  </mat-list-item>
+
+  <mat-list-item (click)="closeSideBar()" [activated]="genreLink.isActive" routerLinkActive #genreLink="routerLinkActive" routerLink="/home/genres">
+    <mat-icon matListItemIcon>category</mat-icon>
+    <span matListItemTitle>Genres</span>
+  </mat-list-item>
+</mat-nav-list>
+
+
+<mat-divider></mat-divider>
+<mat-nav-list>
+  <div mat-subheader>For You</div>
+  <mat-list-item (click)="closeSideBar()"  [activated]="watchLink.isActive"
+                  routerLinkActive
+                  #watchLink="routerLinkActive"
+                  routerLink="/home/my-watch-list">
+    <mat-icon matListItemIcon>playlist_play</mat-icon>
+    <span matListItemTitle>My Watch List</span>
+  </mat-list-item>
+</mat-nav-list>

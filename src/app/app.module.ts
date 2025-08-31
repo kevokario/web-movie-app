@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,10 +8,12 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import {environment} from "../environments/environment";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
-import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
+import { provideHttpClient, withInterceptors} from "@angular/common/http";
 import {loaderInterceptor} from "./core/interceptors/loader.interceptor";
 import {SharedModule} from "./shared/shared.module";
+import {tmdbInterceptor} from "./core/interceptors/tmdb.interceptor";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { UrlSanitizerPipe } from './core/pipes/url-sanitizer.pipe';
 
 @NgModule({
   declarations: [
@@ -19,22 +21,19 @@ import {SharedModule} from "./shared/shared.module";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
-    HttpClientModule,
-    // AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
-    provideFirebaseApp(() => initializeApp({...environment.firebase} )),
+    provideFirebaseApp(() => initializeApp({...environment.firebase})),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideAnimationsAsync(),
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    }
+    provideHttpClient(withInterceptors([loaderInterceptor, tmdbInterceptor]))
   ],
+  exports: [],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

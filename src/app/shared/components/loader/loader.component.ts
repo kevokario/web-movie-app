@@ -19,10 +19,7 @@ export class LoaderComponent implements OnInit{
 
   initLoadingStatus(){
     this.loaderService.getLoadingStatus().subscribe({
-      next:(status)=>{
-        this.showLoader = status;
-        console.log(`Status: ${status}`)
-      }
+      next:(status)=> this.showLoader = status
     })
   }
 

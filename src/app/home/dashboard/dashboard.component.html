@@ -1,0 +1,79 @@
+@defer (when latestMovieCollection) {
+  <div class="container-fluid">
+    <div class="row mb-3">
+      <div class="col-sm-12">
+        <app-movie-slider [movies]="latestMovieCollection.results"></app-movie-slider>
+      </div>
+    </div>
+
+    <!--
+    +++++++++++++++++++++++++++++++++++++++++++++++
+    MOVIES SECTION
+    +++++++++++++++++++++++++++++++++++++++++++++++
+    -->
+   <section>
+     <div class="row mb-3">
+       <div class="col-sm-12 mt-5 mb-1">
+         <div class="d-flex flex-row justify-content-between">
+           <h1 class="flex-grow-1  text-accent" ><b>Popular Movies</b></h1>
+           <app-button routerLink="/home/movies" color="warn" text="View All"/>
+         </div>
+         <mat-divider></mat-divider>
+       </div>
+     </div>
+     <div class="row">
+       <div class="col-sm-12">
+         <app-movie-slider [useFullBackground]="false" [movies]="trendingMovieCollection.results"></app-movie-slider>
+       </div>
+     </div>
+   </section>
+
+    <!--
+     +++++++++++++++++++++++++++++++++++++++++++++++
+     SERIES SECTION
+     +++++++++++++++++++++++++++++++++++++++++++++++
+     -->
+    <section>
+      <div class="row mb-3">
+        <div class="col-sm-12 mt-5 mb-1">
+          <div class="d-flex flex-row justify-content-between">
+            <h1 class="flex-grow-1  text-accent" ><b>TV Series</b></h1>
+            <app-button routerLink="/home/tv-series" color="warn" text="View All"/>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <app-movie-slider [useFullBackground]="false" [movies]="tvSeriesCollection.results"></app-movie-slider>
+        </div>
+      </div>
+    </section>
+
+    <!--
+     +++++++++++++++++++++++++++++++++++++++++++++++
+     ANIMATION SECTION
+     +++++++++++++++++++++++++++++++++++++++++++++++
+     -->
+    <section>
+      <div class="row mb-3">
+        <div class="col-sm-12 mt-5 mb-1">
+          <div class="d-flex flex-row justify-content-between">
+            <h1 class="flex-grow-1  text-accent" >
+              <b>Animations</b>
+            </h1>
+            <app-button routerLink="/home/animations" color="warn" text="View All"/>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <app-movie-slider
+            [useFullBackground]="false"
+            [movies]="animationCollection.results"></app-movie-slider>
+        </div>
+      </div>
+    </section>
+  </div>
+}

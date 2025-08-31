@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 mt-3">
+
+      <app-input
+        [formControl]="searchControl"
+        label="Search Movie"
+        placeholder="Search Movie By Name"
+        prefixIcon="search"
+      />
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    @defer (when movieCollection){
+      @for (movie of movieCollection.results; track movie.id) {
+        <div class="col-sm-6 col-lg-4 my-2">
+          <app-movie-card [genres]="genres" [movie]="movie"></app-movie-card>
+        </div>
+      } @empty {
+        <app-no-records-found></app-no-records-found>
+      }
+
+      @if (movieCollection.results.length > 0) {
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-paginator [length]="movieTotalItems"
+                           [pageSize]="20"
+                           [pageIndex]="moviePageIndex"
+                           [showFirstLastButtons]="true"
+                           (page)="onMoviePageChange($event)"
+                           aria-label="Select page">
+            </mat-paginator>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</div>

@@ -8,6 +8,7 @@ import {TvSeriesComponent} from "./tv-series/tv-series.component";
 import {AnimationsComponent} from "./animations/animations.component";
 import {GenresComponent} from "./genres/genres.component";
 import {WatchListComponent} from "./watch-list/watch-list.component";
+import {MovieDetailsComponent} from "./movie-details/movie-details.component";
 
 const routes: Routes = [{
   path: '',
@@ -25,6 +26,9 @@ const routes: Routes = [{
   },{
     path:'movies',
     component:MoviesComponent
+  },{
+    path:'movie-details/:id',
+    component: MovieDetailsComponent,
   },{
     path:'tv-series',
     component: TvSeriesComponent

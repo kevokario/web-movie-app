@@ -128,6 +128,10 @@ export class AuthService {
     return this.userBehaviourSubject$.asObservable();
   }
 
+  get loggedInUserValue(): User | null{
+    return this.userBehaviourSubject$.value
+  }
+
   set loggedInUser(user: User | null) {
     this.userBehaviourSubject$.next(user);
   }

@@ -1,5 +1,5 @@
 <mat-card>
-  <img style="min-height: 250px" mat-card-image
+  <img (click)="!showActionButtons ? viewDetails(): null" style="min-height: 250px" mat-card-image
        [src]="movie.poster_path |
         urlSanitizer: 'image': true :  imageSize "
        alt="{{title}}" loading="lazy" (error)="onImgError($event)"/>
@@ -26,7 +26,7 @@
 
       </div>
       <div class="d-flex flex-row mt-1 justify-content-center">
-        <app-button class="small-button flex-fill p-0"
+        <app-button (click)="viewDetails()" class="small-button flex-fill p-0"
                     btnStyle="mat-flat-button" [btnSize]="isMobile ? 'small': 'default'"
                     text="View"></app-button>
       </div>

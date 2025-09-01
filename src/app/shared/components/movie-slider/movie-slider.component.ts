@@ -4,6 +4,7 @@ import {ResponsiveService} from "../../utils/responsive.service";
 import {TvSeries} from "../../../core/models/tv-series";
 import {Genre} from "../../../core/models/genre";
 import {MovieService} from "../../../core/services/movie.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-movie-slider',
@@ -19,6 +20,7 @@ export class MovieSliderComponent implements OnInit{
   constructor(
     private responsiveService: ResponsiveService,
     private movieService: MovieService,
+    private router: Router,
   ) {
   }
 
@@ -39,4 +41,7 @@ export class MovieSliderComponent implements OnInit{
     return 'title' in movie ? movie.title : movie.name;
   }
 
+  viewMovie(movie: Movie | TvSeries) {
+    this.router.navigate(['/home/movie-details',movie.id],{queryParams:{type:'movie'}})
+  }
 }

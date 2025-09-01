@@ -9,8 +9,9 @@ type FunctionCall<T> = () => Promise<T> | Observable<T>
 })
 export class WrapperService {
 
-  constructor(private loaderService: LoaderService) {
-  }
+  constructor(
+    private loaderService: LoaderService,
+    ) {}
 
   wrap<T>(fn: FunctionCall<T>): Promise<T> | Observable<T> {
     const r = fn();

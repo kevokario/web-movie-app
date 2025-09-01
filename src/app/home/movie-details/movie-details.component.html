@@ -1,1 +1,81 @@
-<p>movie-details works!</p>
+@defer (when movieDetail && movieWatchLists && tvSeriesWatchLists){
+  <div
+    class="container-fluid has-image-background"
+    [style.height]="isMobile ? 'calc(75vh - 80px)' : 'calc(45vh-40px)'"
+    [style.background-image]="movieDetail.backdrop_path | urlSanitizer :'style': true : 'w500'">
+    <div class="is-overlay w-100">
+      <h2 class="mb-1 text-accent">{{ title }}</h2>
+
+      <div class="d-flex flex-row my-1">
+        <app-button [icon]="'star'"  style="width: fit-content" [text]="movieDetail.vote_average | number : '1.1-1' "></app-button>
+      </div>
+
+      <div class="d-flex flex-row">
+        <app-button
+          (click)="addedToWatchList ? removeFromFavorites() : addToFavorites()"
+          btnStyle="mat-flat-button" color="warn"
+          [icon]=" addedToWatchList ?'favorite':'favorite_border'"
+          style="width: fit-content"
+          [text]="addedToWatchList ? 'Remove From Watch List':'Add To Watchlist'"/>
+      </div>
+      <mat-chip-set >
+        @for (genre of movieDetail.genres; track genre) {
+          <mat-chip class="rounded" color="accent" >{{genre.name}}</mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <mat-card class="mt-3">
+          <mat-card-header>
+            <h3 class="text-accent"><b>OverView</b></h3>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{movieDetail.overview}}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-sm-4">
+        <mat-card class="mt-3">
+          <mat-card-header>
+            <h3 class="text-accent"><b>Languages</b></h3>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-chip-set>
+              @for (language of movieDetail.spoken_languages; track language.iso_639_1) {
+                <mat-chip class="rounded">{{language.name}}</mat-chip>
+              }
+            </mat-chip-set>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-sm-8">
+        <mat-card class="mt-3">
+          <mat-card-header>
+            <h3 class="text-accent"><b>Production Companies</b></h3>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-chip-set>
+              @for (company of movieDetail.production_companies; track company.id) {
+                <mat-chip class="rounded">
+                  <img matChipAvatar [src]="company.origin_country | urlSanitizer: 'image': true : 'w300'"
+                       alt="{{company.name}}" (error)="onImgError($event)"/>
+                  {{company.name}}
+                </mat-chip>
+              }
+            </mat-chip-set>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+}

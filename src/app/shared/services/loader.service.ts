@@ -5,7 +5,7 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class LoaderService {
-  private isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  private isLoading$ = new BehaviorSubject<boolean>(false);
 
   showLoader(){
     this.isLoading$.next(true);

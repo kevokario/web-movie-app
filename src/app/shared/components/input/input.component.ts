@@ -16,8 +16,8 @@ export class InputComponent  implements ControlValueAccessor {
 
   value:any = null;
 
-  @Input() label: string = '';
-  @Input() placeholder: string = '';
+  @Input() label = '';
+  @Input() placeholder = '';
   @Input() type: 'text'|'password'|'email'|'number' = "text";
   @Input() prefixIcon: string | null = null;
   @Input() surfixIcon: string | null = null;

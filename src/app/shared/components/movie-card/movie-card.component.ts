@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Movie} from "../../../core/models/movie";
 import {Genre} from "../../../core/models/genre";
 import {TvSeries} from "../../../core/models/tv-series";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-movie-card',
@@ -17,6 +18,11 @@ export class MovieCardComponent implements OnChanges{
   @Input() showMovieGenre = true;
   @Input() isMobile = false;
   @Input() showActionButtons = true;
+
+  constructor(
+    private router:Router
+  ) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes){
@@ -51,5 +57,16 @@ export class MovieCardComponent implements OnChanges{
   onImgError(event: Event) {
     const target = event.target as HTMLImageElement;
     target.src = 'assets/poster-placeholder.png';
+  }
+
+  async viewDetails(){
+    const isMovie = 'title' in this.movie;
+    await this.router.navigate([
+      '/home/movie-details',this.movie.id
+    ],{
+      queryParams:{
+        type:isMovie ? 'movie':'tv-series'
+      }
+    });
   }
 }

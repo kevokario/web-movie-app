@@ -10,7 +10,7 @@ export const environment = {
   },
   token: 'authToken',
   user:'loggedInUser',
-  appUrl: 'http://localhost:4200',
+  appUrl: 'https://kevokario.github.io/web-movie-app',
   tmdbApi: {
     baseUrl: 'https://api.themoviedb.org/3',
     imageUrl: 'https://image.tmdb.org/t/p',

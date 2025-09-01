@@ -14,7 +14,7 @@ export class MovieCardComponent implements OnChanges{
   @Input() genres!: Genre[];
   @Input() showMovieType = false;
   @Input() movie !:Movie | TvSeries;
-  @Input() imageSize: 'w154' | 'w185' | 'w300' | 'w500' | 'w780' | 'original' = 'w185';
+  @Input() imageSize: 'w154' | 'w185' | 'w300' | 'w500' | 'w780' | 'original' = 'w500';
   @Input() showMovieGenre = true;
   @Input() isMobile = false;
   @Input() showActionButtons = true;

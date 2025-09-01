@@ -11,7 +11,6 @@ import {Observable} from "rxjs";
 
 export class AuthInterceptor implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('I work,')
     const url = req.url;
     if(url.includes('sign') || url.includes('user')){
       return next.handle(req);

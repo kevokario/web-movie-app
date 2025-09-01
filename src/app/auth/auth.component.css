@@ -4,7 +4,7 @@
 
 .image-div {
   height: 100%;
-  background-image: url("/assets/movie_poster.jpeg");
+  /*background-image: url("./../../assets/movie_poster.jpeg");*/
 }
  .form-div {
    height: 100%;

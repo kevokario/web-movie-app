@@ -37,7 +37,6 @@ export class StyleSanitizerPipe implements PipeTransform {
   }
 
   transform(value: string | null | undefined, includeUrl = true, size = 'w500'):  SafeStyle {
-    console.log(value)
     if(!value){
       return this.domSanitizer.bypassSecurityTrustStyle('')
     }

@@ -1,5 +1,5 @@
 <mat-card>
-  <img (click)="!showActionButtons ? viewDetails(): null" style="min-height: 250px" mat-card-image
+  <img (click)="!showActionButtons ? viewDetails(): null" mat-card-image
        [src]="movie.poster_path |
         urlSanitizer: 'image': true :  imageSize "
        alt="{{title}}" loading="lazy" (error)="onImgError($event)"/>

@@ -51,7 +51,6 @@ export class DashboardComponent implements OnInit{
 
         if(latestMovieCollection){
           this.latestMovieCollection = latestMovieCollection;
-          console.log(latestMovieCollection);
         }
 
         if(trendingMovies){

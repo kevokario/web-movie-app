@@ -1,6 +1,6 @@
 # Movie App Assessment
 
-Hi, I’m **Kario Kevo** — a frontend developer specializing in **Angular**, passionate about building clean, responsive, and user-friendly applications.
+Hi, I’m **Kario Kelvin** — a frontend developer specializing in **Angular**, passionate about building clean, responsive, and user-friendly applications.
 
 ## About this project
 This is a **Movie App** built as part of an assessment. It showcases:

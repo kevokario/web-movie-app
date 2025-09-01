@@ -122,10 +122,10 @@ export class MovieDetailsComponent implements OnInit{
 
   addToFavorites(){
     const type = this.activatedRoute.snapshot.queryParams['type'];
-       this.movieService.saveToWatchList(this.user,this.movieDetail,type==='movie'?'movie':'tv-series')
+       this.movieService.saveToWatchList(this.movieDetail,type==='movie'?'movie':'tv-series')
   }
   removeFromFavorites(){
     const type = this.activatedRoute.snapshot.queryParams['type'];
-      this.movieService.deleteFromWatchList(this.user,this.movieDetail,type==='movie'?'movie':'tv-series');
+      this.movieService.deleteFromWatchList(this.movieDetail,type==='movie'?'movie':'tv-series');
   }
 }

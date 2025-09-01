@@ -11,7 +11,6 @@ export class SettingsComponent implements OnInit{
   user:User | null = null;
   constructor(
     private authService: AuthService,
-    private movieService: MovieService,
   ) {
   }
 

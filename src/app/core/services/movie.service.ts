@@ -7,7 +7,7 @@ import {MovieCollection} from "../models/movie";
 import {TvSeriesCollection} from "../models/tv-series";
 import {SeriesDetail} from "../models/series-detail";
 import {MovieDetail} from "../models/movie-detail";
-import {addDoc, collection, deleteDoc, doc, Firestore, getDocs, query, where} from "@angular/fire/firestore";
+import {addDoc, collection, deleteDoc, Firestore, getDocs, query, where} from "@angular/fire/firestore";
 import {AuthService} from "./auth.service";
 import {WrapperService} from "../../shared/utils/wrapper.service";
 import Swal from 'sweetalert2';
@@ -105,7 +105,7 @@ export class MovieService {
     );
   }
 
-  get movieWatchList() {
+  get movieWatchList(): Observable<MovieDetail[]> {
     return this.movieWatchList$.asObservable();
   }
 
@@ -113,7 +113,7 @@ export class MovieService {
     this.movieWatchList$.next(movieDetail);
   }
 
-  get seriesWatchList() {
+  get seriesWatchList() :Observable<SeriesDetail[]>{
     return this.seriesWatchList$.asObservable();
   }
 
@@ -121,7 +121,8 @@ export class MovieService {
     this.seriesWatchList$.next(seriesDetail);
   }
 
-  saveToWatchList(user:User | null, movie: MovieDetail | SeriesDetail, type:'movie' |'tv-series'){
+  saveToWatchList(movie: MovieDetail | SeriesDetail, type:'movie' |'tv-series'){
+    const user = this.authService.loggedInUserValue;
     if (!user) {
       this.authService.logout().then();
       return;
@@ -226,7 +227,8 @@ export class MovieService {
 
     return this.wrapperService.wrap(() => fetch$) as Observable<any[]>;
   }
-  deleteFromWatchList(user:User | null, movie: MovieDetail | SeriesDetail, type:'movie' |'tv-series'){
+  deleteFromWatchList( movie: MovieDetail | SeriesDetail, type:'movie' |'tv-series'){
+    const user = this.authService.loggedInUserValue
     if (!user) {
       this.authService.logout().then();
       return;
@@ -234,7 +236,7 @@ export class MovieService {
 
     const fn = type === 'movie'
       ? this.deleteMovie(user.id,movie.id)
-      : this.deleteTvSeries(user.id,movie.fire_id);
+      : this.deleteTvSeries(user.id,movie.id);
 
     fn.subscribe({
       next:(e)=>{
@@ -285,7 +287,7 @@ export class MovieService {
     ) as Observable<any>;
   }
 
-  private deleteTvSeries(userId: string, seriesId: string): Observable<any> {
+  private deleteTvSeries(userId: string, seriesId: number): Observable<any> {
     const userSeriesCollection =
       collection(this.fireStore, `users/${userId}/tv-series/`);
 

@@ -1,1 +1,117 @@
-<p>watch-list works!</p>
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-12">
+      <h1 class="mt-4 mb-1 text-accent">
+        <b>My Watch List</b>
+      </h1>
+    </div>
+
+    <div class="col-12">
+      <mat-tab-group color="accent">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="me-2">movie</mat-icon> Movies
+          </ng-template>
+          <div class="container-fluid">
+
+            @defer (when favoriteMovies) {
+              <div class="row pt-3">
+                @for (movie of favoriteMovies; track movie.id) {
+                  <div class="col-sm-6 col-md-6 mb-2">
+                    <mat-card >
+                      <mat-card-header>
+                        <div
+                          mat-card-avatar
+                          [style.background-image]="movie.backdrop_path | urlSanitizer :'style': true : 'w154'"
+                          style=" background-size: cover;" ></div>
+                        <mat-card-title >{{ movie.title }}</mat-card-title>
+                        <mat-card-subtitle
+                          class="text-warn">
+                        </mat-card-subtitle>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <p>
+                          {{movie.overview}}
+                        </p>
+                        <mat-chip-set>
+                          @for (genre of movie.genres; track genre.id) {
+                            <mat-chip class="rounded">{{genre.name}}</mat-chip>
+                          }
+                        </mat-chip-set>
+                      </mat-card-content>
+                      <mat-card-actions align="end">
+                        <app-button btnStyle="mat-stroked-button" icon="star" [text]="movie.vote_average | number:'1.1-1'" color="warn"/>
+                        <app-button
+                          class="ms-1"
+                          (click)="removeFromFavorites(movie,'movie')"
+                          title="remove"
+                          text="Remove" [icon]="'favorite_border'" color="warn"/>
+                      </mat-card-actions>
+                    </mat-card>
+                  </div>
+                } @empty {
+                  <app-no-records-found></app-no-records-found>
+                }
+              </div>
+            } @placeholder (minimum 2s){
+              ...
+            }
+
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="me-2">tv</mat-icon> TV Series
+          </ng-template>
+          <div class="container-fluid">
+            @defer (when favoriteTvSeries){
+              <div class="row pt-3">
+                @for (series of favoriteTvSeries; track series.id) {
+                  <div class="col-sm-6 col-md-6 mb-2">
+                    <mat-card >
+                      <mat-card-header>
+                        <div
+                          mat-card-avatar
+                          [style.background-image]="series.backdrop_path | urlSanitizer :'style': true : 'w154'"
+                          style=" background-size: cover;" ></div>
+                        <mat-card-title >{{ series.name }}</mat-card-title>
+                        <mat-card-subtitle
+                          class="text-warn">
+                        </mat-card-subtitle>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <p>
+                          {{series.overview}}
+                        </p>
+                        <mat-chip-set>
+                          @for (genre of series.genres; track genre.id) {
+                            <mat-chip class="rounded">{{genre.name}}</mat-chip>
+                          }
+                        </mat-chip-set>
+                      </mat-card-content>
+                      <mat-card-actions align="end">
+                        <app-button btnStyle="mat-stroked-button" icon="star" [text]="series.vote_average | number:'1.1-1'" color="warn"/>
+                        <app-button class="ms-1"
+                                    title="remove"
+                                    text="Remove"
+                                    [icon]="'favorite_border'"
+                                    (click)="removeFromFavorites(series,'tv-series')"
+                                    color="warn"/>
+                      </mat-card-actions>
+                    </mat-card>
+                  </div>
+                } @empty {
+                  <app-no-records-found></app-no-records-found>
+                }
+              </div>
+            } @placeholder (minimum 2s) {
+              ...
+            }
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+  </div>
+</div>

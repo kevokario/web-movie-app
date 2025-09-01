@@ -11,10 +11,7 @@ export class ResponsiveService {
 
   initBreakPointObserver() {
     this.breakPointObserver.observe([Breakpoints.Handset, Breakpoints.Small]).subscribe({
-      next:(breakPoint)=> {
-        this.isMobile$.next(breakPoint.matches)
-        console.log(this.isMobile$.value)
-      }
+      next:(breakPoint)=> this.isMobile$.next(breakPoint.matches)
     })
   }
 
